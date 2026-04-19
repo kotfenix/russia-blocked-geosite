@@ -28,7 +28,7 @@ jobs:
           echo "WIN_UPDATE=https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/update.txt" >> $GITHUB_ENV
           echo "WIN_EXTRA=https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/extra.txt" >> $GITHUB_ENV
           echo "HAGEZI_NORMAL_URL=https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/multi.txt" >> $GITHUB_ENV
-          echo "HAGEZI_LIGHT_URL=https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/light.txt" >> $GITHUB_ENV
+          echo "HAGEZI_LIGHT_URL=https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/light.txt" >> $GITHUB_ENV
           
           
           echo "GFW=https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/refs/heads/release/gfw.txt" >> $GITHUB_ENV
