@@ -85,17 +85,13 @@ jobs:
         run: |
           curl -fsSL "$HAGEZI_LIGHT_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-light.txt
           curl -fsSL "$HAGEZI_NORMAL_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-normal.txt
-          curl -fsSL "$HAGEZI_PRO_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-pro.txt
           curl -fsSL "$HAGEZI_PRO_MINI_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-pro-mini.txt
-          curl -fsSL "$HAGEZI_ULTIMATE_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-ultimate.txt
           curl -fsSL "$HAGEZI_ULTIMATE_MINI_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-ultimate-mini.txt
           curl -fsSL "$HAGEZI_TIF_MEDIUM_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-tif-medium.txt
           
           sort --ignore-case -u ads-hagezi-light.txt > ./community/data/ads-hagezi-light
           sort --ignore-case -u ads-hagezi-normal.txt > ./community/data/ads-hagezi-normal
-          sort --ignore-case -u ads-hagezi-pro.txt > ./community/data/ads-hagezi-pro
           sort --ignore-case -u ads-hagezi-pro-mini.txt > ./community/data/ads-hagezi-pro-mini
-          sort --ignore-case -u ads-hagezi-ultimate.txt > ./community/data/ads-hagezi-ultimate
           sort --ignore-case -u ads-hagezi-ultimate-mini.txt > ./community/data/ads-hagezi-ultimate-mini
           sort --ignore-case -u ads-hagezi-tif-medium.txt > ./community/data/ads-hagezi-tif-medium
           
