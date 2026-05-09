@@ -64,7 +64,8 @@ jobs:
           cache-dependency-path: ./custom/go.sum
 
       - name: Get and add domain lists
-        run: |          
+        run: |
+          set -euo pipefail          
           curl -sSL $ANTIFILTER_DOWNLOAD > ./antifilter-download.txt
           curl -sSL $ANTIFILTER_DOWNLOAD_COMMUNITY > ./antifilter-download-community.txt
           curl -sSL $REFILTER_ALL > ./refilter.txt
@@ -83,13 +84,13 @@ jobs:
 
       - name: Build ad block
         run: |
-          curl -sSL "$HAGEZI_LIGHT_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-light.txt
-          curl -sSL "$HAGEZI_NORMAL_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-normal.txt
-          curl -sSL "$HAGEZI_PRO_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-pro.txt
-          curl -sSL "$HAGEZI_PRO_MINI_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-pro-mini.txt
-          curl -sSL "$HAGEZI_ULTIMATE_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-ultimate.txt
-          curl -sSL "$HAGEZI_ULTIMATE_MINI_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-ultimate-mini.txt
-          curl -sSL "$HAGEZI_TIF_MEDIUM_URL" | perl -ne 'if (/^\|\|(.+)\^$/) { $d=$1; next if $d =~ m{/}; next if $d =~ /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/; if ($d =~ /\*/) { $r=$d; $r =~ s/\./\\./g; $r =~ s/\*/.*/g; print "regexp:^([^.]+\\.)?$r\$\n"; } else { print "domain:$d\n"; } }' > ads-hagezi-tif-medium.txt
+          curl -sSL "$HAGEZI_LIGHT_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-light.txt
+          curl -sSL "$HAGEZI_NORMAL_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-normal.txt
+          curl -sSL "$HAGEZI_PRO_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-pro.txt
+          curl -sSL "$HAGEZI_PRO_MINI_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-pro-mini.txt
+          curl -sSL "$HAGEZI_ULTIMATE_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-ultimate.txt
+          curl -sSL "$HAGEZI_ULTIMATE_MINI_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-ultimate-mini.txt
+          curl -sSL "$HAGEZI_TIF_MEDIUM_URL" |  perl -ne '/^\|\|([-_0-9a-zA-Z]+(\.[-_0-9a-zA-Z]+){1,64})\^$/ && print "$1\n"' | perl -ne 'print if not /^[0-9]{1,3}(\.[0-9]{1,3}){3}$/' > ads-hagezi-tif-medium.txt
           
           cat ads-hagezi-light.txt | sort --ignore-case -u > ./community/data/ads-hagezi-light
           cat ads-hagezi-normal.txt | sort --ignore-case -u > ./community/data/ads-hagezi-normal
